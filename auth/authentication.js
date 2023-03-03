@@ -8,7 +8,7 @@ router.post("/login", function (req, res, next) {
   passport.authenticate("local", function (err, user, info) {
     if (err) throw err;
     if (!user) {
-      return res.status(500).json({
+      return res.status(200).json({
         message: "Invalid username or password",
         err: true,
       });
@@ -16,7 +16,7 @@ router.post("/login", function (req, res, next) {
     req.logIn(user, function (err) {
       if (err) {
         console.log(err);
-        return res.status(500).json({
+        return res.status(200).json({
           message: "Invalid username or password",
           err: true,
         });
@@ -24,8 +24,8 @@ router.post("/login", function (req, res, next) {
 
       res.status(200).json({
         message: "You have successfully logged in",
-        user,
         err: false,
+        user,
       });
     });
   })(req, res, next);
